@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UserController implements UserControllerInterface {
 
+    @RequestMapping("/users")
     @Override
     public User createUser() {
 
@@ -15,6 +16,7 @@ public class UserController implements UserControllerInterface {
         return result;
     }
 
+    @RequestMapping("/users")
     @Override
     public User deleteUser() {
 
@@ -32,6 +34,7 @@ public class UserController implements UserControllerInterface {
         return result;
     }
 
+    @RequestMapping("/users")
     @Override
     public User updateUser(User user) {
 
