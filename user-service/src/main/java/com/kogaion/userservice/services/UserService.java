@@ -42,6 +42,14 @@ public class UserService implements UserServiceContract {
 
     @Override
     public User searchUserByEmail(String userEmail) {
+
+        System.out.println("Email is: " + userEmail);
+
+        for(User u: users) {
+            if(u.getEmail().equals(userEmail))
+                return u;
+        }
+
         return null;
     }
 }

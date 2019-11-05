@@ -4,10 +4,7 @@ import com.kogaion.userservice.entities.User;
 import com.kogaion.userservice.services.UserService;
 import com.kogaion.userservice.services.UserServiceContract;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
@@ -39,9 +36,8 @@ public class UserController implements UserControllerInterface {
 
     @RequestMapping(value = "/users", method = RequestMethod.GET, produces = "application/json")
     @Override
-    public User getUser(@RequestBody User user) {
-
-        return userService.searchUserByUsername(user.getFirstName());
+    public User getUser(@RequestParam(name = "email") String email) {
+        return userService.searchUserByEmail(email);
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.PUT, produces = "application/json")

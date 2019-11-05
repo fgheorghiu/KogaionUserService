@@ -2,6 +2,7 @@ package com.kogaion.userservice;
 
 import com.kogaion.userservice.entities.User;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 public interface UserControllerInterface {
 
@@ -9,7 +10,7 @@ public interface UserControllerInterface {
 
     User deleteUser();
 
-    User getUser(User user);
+    User getUser(@RequestParam(name = "email") String email);
 
     User updateUser(User user);
 

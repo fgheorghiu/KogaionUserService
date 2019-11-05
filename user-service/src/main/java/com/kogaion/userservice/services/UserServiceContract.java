@@ -2,6 +2,7 @@ package com.kogaion.userservice.services;
 
 import com.kogaion.userservice.entities.User;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Component
 public interface UserServiceContract {
@@ -10,6 +11,6 @@ public interface UserServiceContract {
 
     public User searchUserById(long userId);
 
-    public User searchUserByEmail(String userEmail);
+    public User searchUserByEmail(String email);
 
 }
