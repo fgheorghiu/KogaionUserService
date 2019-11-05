@@ -1,22 +1,34 @@
 package com.kogaion.userservice;
 
 import com.kogaion.userservice.entities.User;
+import com.kogaion.userservice.services.UserService;
+import com.kogaion.userservice.services.UserServiceContract;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.security.Principal;
 
 @RestController
 public class UserController implements UserControllerInterface {
 
-    @RequestMapping("/users")
-    @Override
-    public User createUser() {
+    @Autowired
+    private UserServiceContract userService;
 
-        User result = new User();
+    public UserController() {
 
-        return result;
     }
 
-    @RequestMapping("/users")
+    @RequestMapping(value = "/users", method = RequestMethod.POST, produces = "application/json")
+    @Override
+    public User createUser(@RequestBody User user) {
+
+        return user;
+    }
+
+    @RequestMapping(value = "/users", method = RequestMethod.DELETE, produces = "application/json")
     @Override
     public User deleteUser() {
 
@@ -25,21 +37,24 @@ public class UserController implements UserControllerInterface {
         return result;
     }
 
-    @RequestMapping("/users")
+    @RequestMapping(value = "/users", method = RequestMethod.GET, produces = "application/json")
     @Override
-    public User getUser(User user) {
+    public User getUser(@RequestBody User user) {
 
-        User result = new User();
-
-        return result;
+        return userService.searchUserByUsername(user.getFirstName());
     }
 
-    @RequestMapping("/users")
+    @RequestMapping(value = "/users", method = RequestMethod.PUT, produces = "application/json")
     @Override
     public User updateUser(User user) {
 
         User result = new User();
 
         return result;
+    }
+
+    @RequestMapping(value = "/user/login", method = RequestMethod.GET)
+    public void login(Principal principal) {
+        System.out.println("Principal: " + principal.getName());
     }
 }

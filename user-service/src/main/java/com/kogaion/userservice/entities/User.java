@@ -67,4 +67,11 @@ public class User {
         this.friendsIds = friendsIds;
     }
 
+    @Override
+    public String toString() {
+
+        String result = this.getFirstName() + " " + this.getLastName();
+
+        return result;
+    }
 }
