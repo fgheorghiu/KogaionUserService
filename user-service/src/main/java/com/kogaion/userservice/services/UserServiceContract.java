@@ -1,16 +1,20 @@
 package com.kogaion.userservice.services;
 
 import com.kogaion.userservice.entities.User;
+import org.keycloak.representations.AccessTokenResponse;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.ws.rs.core.Response;
 
 @Component
 public interface UserServiceContract {
 
-    public User searchUserByUsername(String username);
+   AccessTokenResponse loginUser(User user);
 
-    public User searchUserById(long userId);
+   User logoutUser(User user);
 
-    public User searchUserByEmail(String email);
+   ResponseEntity<String> registerUser(User user);
 
+   User deleteUser(User user);
 }

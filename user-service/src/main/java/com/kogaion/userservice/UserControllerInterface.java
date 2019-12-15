@@ -1,17 +1,20 @@
 package com.kogaion.userservice;
 
 import com.kogaion.userservice.entities.User;
+import org.keycloak.representations.AccessTokenResponse;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.ws.rs.core.Response;
 
 public interface UserControllerInterface {
 
-    User createUser(@RequestBody User user);
+    ResponseEntity<String> createUser(@RequestBody User user);
 
-    User deleteUser();
+    User deleteUser(@RequestBody User user);
 
-    User getUser(@RequestParam(name = "email") String email);
+    AccessTokenResponse login(@RequestBody User user);
 
-    User updateUser(User user);
+    User logout();
 
 }

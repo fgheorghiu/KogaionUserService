@@ -1,12 +1,14 @@
 package com.kogaion.userservice;
 
 import com.kogaion.userservice.entities.User;
-import com.kogaion.userservice.services.UserService;
 import com.kogaion.userservice.services.UserServiceContract;
+import org.keycloak.representations.AccessTokenResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import java.security.Principal;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class UserController implements UserControllerInterface {
@@ -20,37 +22,32 @@ public class UserController implements UserControllerInterface {
 
     @RequestMapping(value = "/users", method = RequestMethod.POST, produces = "application/json")
     @Override
-    public User createUser(@RequestBody User user) {
+    public ResponseEntity<String> createUser(@RequestBody User user) {
 
-        return user;
+        return userService.registerUser(user);
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.DELETE, produces = "application/json")
     @Override
-    public User deleteUser() {
+    public User deleteUser(@RequestBody User user) {
 
+//        Keycloak keycloak = Keycloak.getInstance(serverUrl, realmName, username, password, clientId, clientSecret);
+//        Response createUserResponse = keycloak.realm(realmName).users().get(user.get)
+//        createUserResponse.close();
         User result = new User();
 
         return result;
     }
 
-    @RequestMapping(value = "/users", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/users/login", method = RequestMethod.POST)
+    public AccessTokenResponse login(@RequestBody User user) {
+
+        return userService.loginUser(user);
+    }
+
     @Override
-    public User getUser(@RequestParam(name = "email") String email) {
-        return userService.searchUserByEmail(email);
+    public User logout() {
+        return null;
     }
 
-    @RequestMapping(value = "/users", method = RequestMethod.PUT, produces = "application/json")
-    @Override
-    public User updateUser(User user) {
-
-        User result = new User();
-
-        return result;
-    }
-
-    @RequestMapping(value = "/user/login", method = RequestMethod.GET)
-    public void login(Principal principal) {
-        System.out.println("Principal: " + principal.getName());
-    }
 }
